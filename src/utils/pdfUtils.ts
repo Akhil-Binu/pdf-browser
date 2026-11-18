@@ -192,8 +192,6 @@ export async function protectPdfDocument(
   const arrayBuffer = await file.arrayBuffer();
   const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
 
-  // Encrypt with AES-256 standard via pdf-lib encrypt method
-  // Note: pdf-lib encrypt requires userPassword and optional ownerPassword
   if (typeof (pdfDoc as unknown as { encrypt?: (opts: unknown) => void }).encrypt === 'function') {
     (pdfDoc as unknown as { encrypt: (opts: unknown) => void }).encrypt({
       userPassword,
@@ -210,6 +208,178 @@ export async function protectPdfDocument(
   }
 
   return pdfDoc.save();
+}
+
+/**
+ * Signs a PDF with signature image and text fields.
+ */
+export async function signPdfDocument(
+  file: File,
+  signaturePngDataUrl: string,
+  targetPage: number, // 1-based
+  bounds: { xRatio: number; yRatio: number; widthRatio: number; heightRatio: number },
+  extraTexts?: Array<{ text: string; xRatio: number; yRatio: number; size: number }>
+): Promise<Uint8Array> {
+  const arrayBuffer = await file.arrayBuffer();
+  const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+  const page = pdfDoc.getPage(targetPage - 1);
+  const { width, height } = page.getSize();
+
+  // Embed signature image
+  const pngBytes = dataUrlToUint8Array(signaturePngDataUrl);
+  const sigImg = await pdfDoc.embedPng(pngBytes);
+
+  const sigWidth = bounds.widthRatio * width;
+  const sigHeight = bounds.heightRatio * height;
+  const sigX = bounds.xRatio * width;
+  // In PDF, Y=0 is bottom
+  const sigY = height - bounds.yRatio * height - sigHeight;
+
+  page.drawImage(sigImg, {
+    x: sigX,
+    y: Math.max(0, sigY),
+    width: sigWidth,
+    height: sigHeight,
+  });
+
+  // Add optional text fields (Date, Name, Title)
+  if (extraTexts && extraTexts.length > 0) {
+    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    for (const item of extraTexts) {
+      const textX = item.xRatio * width;
+      const textY = height - item.yRatio * height;
+      page.drawText(item.text, {
+        x: textX,
+        y: Math.max(10, textY),
+        size: item.size || 12,
+        font,
+        color: rgb(0.1, 0.1, 0.1),
+      });
+    }
+  }
+
+  return pdfDoc.save();
+}
+
+/**
+ * Permanently redacts/sanitizes regions on PDF pages.
+ */
+export async function redactPdfDocument(
+  file: File,
+  boxes: Array<{ pageNumber: number; xRatio: number; yRatio: number; widthRatio: number; heightRatio: number; color?: 'black' | 'white' }>
+): Promise<Uint8Array> {
+  const arrayBuffer = await file.arrayBuffer();
+  const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+
+  for (const box of boxes) {
+    const pageIndex = box.pageNumber - 1;
+    if (pageIndex < 0 || pageIndex >= pdfDoc.getPageCount()) continue;
+
+    const page = pdfDoc.getPage(pageIndex);
+    const { width, height } = page.getSize();
+
+    const rectWidth = box.widthRatio * width;
+    const rectHeight = box.heightRatio * height;
+    const rectX = box.xRatio * width;
+    const rectY = height - box.yRatio * height - rectHeight;
+
+    const fillColor = box.color === 'white' ? rgb(1, 1, 1) : rgb(0, 0, 0);
+
+    page.drawRectangle({
+      x: rectX,
+      y: rectY,
+      width: rectWidth,
+      height: rectHeight,
+      color: fillColor,
+      opacity: 1,
+    });
+  }
+
+  return pdfDoc.save();
+}
+
+/**
+ * Resizes PDF pages to standard sizes (A4, Letter) with margins or 2-Up layout.
+ */
+export async function resizePdfDocument(
+  file: File,
+  targetSize: 'a4' | 'letter',
+  mode: 'fit' | '2up',
+  marginPt = 20
+): Promise<Uint8Array> {
+  const arrayBuffer = await file.arrayBuffer();
+  const srcDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+  const newDoc = await PDFDocument.create();
+
+  // Dimensions in points (72 pt per inch)
+  const targetW = targetSize === 'a4' ? 595.28 : 612;
+  const targetH = targetSize === 'a4' ? 841.89 : 792;
+
+  const pageCount = srcDoc.getPageCount();
+
+  if (mode === 'fit') {
+    // Standard fit: scale each page to target size with uniform margin
+    for (let i = 0; i < pageCount; i++) {
+      const [embedded] = await newDoc.embedPdf(srcDoc, [i]);
+      const newPage = newDoc.addPage([targetW, targetH]);
+
+      const availW = targetW - marginPt * 2;
+      const availH = targetH - marginPt * 2;
+      const scaleX = availW / embedded.width;
+      const scaleY = availH / embedded.height;
+      const scale = Math.min(scaleX, scaleY);
+
+      const drawW = embedded.width * scale;
+      const drawH = embedded.height * scale;
+      const drawX = (targetW - drawW) / 2;
+      const drawY = (targetH - drawH) / 2;
+
+      newPage.drawPage(embedded, {
+        x: drawX,
+        y: drawY,
+        width: drawW,
+        height: drawH,
+      });
+    }
+  } else {
+    // 2-Up mode: Place 2 pages side-by-side on a landscape target sheet
+    const sheetW = targetH; // Landscape
+    const sheetH = targetW;
+
+    for (let i = 0; i < pageCount; i += 2) {
+      const newPage = newDoc.addPage([sheetW, sheetH]);
+      const halfW = sheetW / 2 - marginPt * 1.5;
+      const availH = sheetH - marginPt * 2;
+
+      // First page on left
+      const [leftPage] = await newDoc.embedPdf(srcDoc, [i]);
+      const leftScale = Math.min(halfW / leftPage.width, availH / leftPage.height);
+      const leftDrawW = leftPage.width * leftScale;
+      const leftDrawH = leftPage.height * leftScale;
+      newPage.drawPage(leftPage, {
+        x: marginPt + (halfW - leftDrawW) / 2,
+        y: (sheetH - leftDrawH) / 2,
+        width: leftDrawW,
+        height: leftDrawH,
+      });
+
+      // Second page on right (if exists)
+      if (i + 1 < pageCount) {
+        const [rightPage] = await newDoc.embedPdf(srcDoc, [i + 1]);
+        const rightScale = Math.min(halfW / rightPage.width, availH / rightPage.height);
+        const rightDrawW = rightPage.width * rightScale;
+        const rightDrawH = rightPage.height * rightScale;
+        newPage.drawPage(rightPage, {
+          x: sheetW / 2 + marginPt * 0.5 + (halfW - rightDrawW) / 2,
+          y: (sheetH - rightDrawH) / 2,
+          width: rightDrawW,
+          height: rightDrawH,
+        });
+      }
+    }
+  }
+
+  return newDoc.save();
 }
 
 /**

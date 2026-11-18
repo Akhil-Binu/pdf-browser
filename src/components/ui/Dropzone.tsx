@@ -1,22 +1,28 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useMemo } from 'react';
 import { AlertTriangle, X } from 'lucide-react';
 
-interface DropzoneProps {
+export type AcceptProp = string | Record<string, string[]>;
+
+export interface DropzoneProps {
   onFilesAdded: (files: File[]) => void;
-  accept: string;
-  multiple: boolean;
-  label: string;
-  sublabel: string;
+  accept?: AcceptProp;
+  multiple?: boolean;
+  label?: string;
+  sublabel?: string;
+  title?: string;
+  subtitle?: string;
   icon: React.ReactNode;
   onError?: (message: string) => void;
 }
 
 export function Dropzone({
   onFilesAdded,
-  accept,
-  multiple,
+  accept = '*/*',
+  multiple = false,
   label,
   sublabel,
+  title,
+  subtitle,
   icon,
   onError,
 }: DropzoneProps) {
@@ -24,10 +30,26 @@ export function Dropzone({
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const acceptedTypes = accept.split(',').map((t) => t.trim().toLowerCase());
+  const displayLabel = label || title || 'Drop files here';
+  const displaySublabel = sublabel || subtitle || 'or click to browse';
+
+  const normalizedAcceptString = useMemo(() => {
+    if (typeof accept === 'string') return accept;
+    return Object.entries(accept)
+      .flatMap(([mime, exts]) => [mime, ...exts])
+      .join(',');
+  }, [accept]);
+
+  const acceptedTypes = useMemo(() => {
+    return normalizedAcceptString
+      .split(',')
+      .map((t) => t.trim().toLowerCase())
+      .filter(Boolean);
+  }, [normalizedAcceptString]);
 
   const isFileTypeAccepted = useCallback(
     (file: File): boolean => {
+      if (acceptedTypes.length === 0 || acceptedTypes.includes('*/*')) return true;
       const fileType = file.type.toLowerCase();
       const fileName = file.name.toLowerCase();
 
@@ -62,7 +84,7 @@ export function Dropzone({
       }
 
       if (rejectedNames.length > 0) {
-        const msg = `Unsupported file${rejectedNames.length > 1 ? 's' : ''} skipped: ${rejectedNames.slice(0, 3).join(', ')}${rejectedNames.length > 3 ? ` and ${rejectedNames.length - 3} more` : ''}. Allowed types: ${accept}`;
+        const msg = `Unsupported file${rejectedNames.length > 1 ? 's' : ''} skipped: ${rejectedNames.slice(0, 3).join(', ')}${rejectedNames.length > 3 ? ` and ${rejectedNames.length - 3} more` : ''}. Allowed types: ${normalizedAcceptString}`;
         setErrorMessage(msg);
         if (onError) onError(msg);
       } else {
@@ -73,7 +95,7 @@ export function Dropzone({
         onFilesAdded(validFiles);
       }
     },
-    [isFileTypeAccepted, accept, onFilesAdded, onError]
+    [isFileTypeAccepted, normalizedAcceptString, onFilesAdded, onError]
   );
 
   const handleDragEnter = useCallback((e: React.DragEvent) => {
@@ -143,7 +165,7 @@ export function Dropzone({
         <input
           ref={inputRef}
           type="file"
-          accept={accept}
+          accept={normalizedAcceptString}
           multiple={multiple}
           onChange={handleInputChange}
           className="hidden"
@@ -158,10 +180,10 @@ export function Dropzone({
           </div>
           <div>
             <p className="text-base font-semibold text-gray-800 dark:text-gray-100">
-              {label}
+              {displayLabel}
             </p>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              {sublabel}
+              {displaySublabel}
             </p>
           </div>
         </div>
