@@ -493,15 +493,15 @@ export function QrSuite() {
             <span className="font-semibold text-sm text-gray-900 dark:text-gray-100">Live Preview</span>
 
             {generatedDataUrl ? (
-              <div className="p-4 bg-white rounded-2xl shadow-md border border-gray-200 dark:border-gray-700">
+              <div className="p-3 sm:p-4 bg-white rounded-2xl shadow-md border border-gray-200 dark:border-gray-700">
                 <img
                   src={generatedDataUrl}
                   alt="Generated QR Code"
-                  className="w-60 h-60 object-contain rounded-lg"
+                  className="w-48 h-48 sm:w-60 sm:h-60 object-contain rounded-lg"
                 />
               </div>
             ) : (
-              <div className="w-60 h-60 rounded-2xl border-2 border-dashed border-gray-300 dark:border-gray-700 flex items-center justify-center text-xs text-gray-400">
+              <div className="w-48 h-48 sm:w-60 sm:h-60 rounded-2xl border-2 border-dashed border-gray-300 dark:border-gray-700 flex items-center justify-center text-xs text-gray-400">
                 Enter details to generate QR
               </div>
             )}

@@ -354,7 +354,7 @@ export function PdfDiff() {
           </div>
 
           {/* View Container */}
-          <div className="relative rounded-2xl border border-gray-200 dark:border-gray-800 bg-slate-100 dark:bg-gray-950 p-4 min-h-[460px] flex items-center justify-center overflow-hidden">
+          <div className="relative rounded-2xl border border-gray-200 dark:border-gray-800 bg-slate-100 dark:bg-gray-950 p-2.5 sm:p-4 min-h-[260px] sm:min-h-[460px] flex items-center justify-center overflow-hidden">
             {isLoading && (
               <div className="absolute inset-0 bg-white/70 dark:bg-gray-950/70 backdrop-blur-xs flex items-center justify-center z-20">
                 <Spinner className="w-8 h-8 text-teal-500" />

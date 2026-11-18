@@ -39,16 +39,16 @@ function App() {
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-200">
       <Header />
 
-      <main className="flex-1 max-w-5xl mx-auto w-full px-4 py-6 sm:py-10">
+      <main className="flex-1 max-w-5xl mx-auto w-full px-3 sm:px-4 py-4 sm:py-8 md:py-10">
         {/* Hero Section */}
-        <div className="text-center mb-6 sm:mb-8">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 text-xs font-bold border border-emerald-200 dark:border-emerald-800 mb-2">
+        <div className="text-center mb-5 sm:mb-8">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 text-[11px] sm:text-xs font-bold border border-emerald-200 dark:border-emerald-800 mb-2">
             <span>v3.0 • 23 High-Speed Client Utilities</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
+          <h2 className="text-xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
             Client-Side PDF, Image & Media Studio
           </h2>
-          <p className="mt-2 text-xs sm:text-sm text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
+          <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm text-gray-600 dark:text-gray-400 max-w-xl mx-auto px-2">
             Process documents, images, audio, video, and code securely right in your browser. All computations happen locally with zero file uploads and zero servers.
           </p>
         </div>
@@ -57,7 +57,7 @@ function App() {
         <ToolSwitcher activeTool={activeTool} onToolChange={setActiveTool} />
 
         {/* Active Tool Workspace */}
-        <div className="mt-6 bg-white/80 dark:bg-gray-900/70 backdrop-blur-md rounded-3xl p-5 sm:p-8 border border-gray-200/80 dark:border-gray-800 shadow-xl shadow-gray-200/40 dark:shadow-none">
+        <div className="mt-4 sm:mt-6 bg-white/80 dark:bg-gray-900/70 backdrop-blur-md rounded-2xl sm:rounded-3xl p-3.5 sm:p-6 md:p-8 border border-gray-200/80 dark:border-gray-800 shadow-xl shadow-gray-200/40 dark:shadow-none">
           {/* PDF Suite */}
           {activeTool === 'merge-pdf' && <MergePdf />}
           {activeTool === 'split-pdf' && <SplitPdf />}

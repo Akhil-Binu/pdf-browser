@@ -162,8 +162,8 @@ export function SvgOptimizer() {
       ) : (
         <div className="space-y-6">
           {/* Stats Bar */}
-          <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800">
-            <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-6">
               <div>
                 <span className="text-[10px] uppercase font-semibold text-gray-400 block">Original</span>
                 <span className="font-mono font-bold text-sm text-gray-700 dark:text-gray-300">

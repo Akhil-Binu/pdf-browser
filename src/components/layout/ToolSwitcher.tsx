@@ -267,11 +267,11 @@ export function ToolSwitcher({ activeTool, onToolChange }: ToolSwitcherProps) {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3 sm:space-y-4">
       {/* Search and Category Filters */}
-      <div className="flex flex-col sm:flex-row gap-3 items-center justify-between">
-        {/* Category Pill Tabs */}
-        <div className="flex items-center gap-1.5 p-1 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm w-full sm:w-auto overflow-x-auto">
+      <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 items-stretch sm:items-center justify-between">
+        {/* Category Pill Tabs with smooth horizontal touch scroll */}
+        <div className="flex items-center gap-1 sm:gap-1.5 p-1 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-xs overflow-x-auto no-scrollbar scroll-smooth">
           {[
             { id: 'all', label: 'All Utilities', count: counts.all },
             { id: 'pdf', label: 'PDF Suite', count: counts.pdf },
@@ -283,16 +283,18 @@ export function ToolSwitcher({ activeTool, onToolChange }: ToolSwitcherProps) {
               key={cat.id}
               type="button"
               onClick={() => setSelectedCategory(cat.id as ToolCategory)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer flex items-center gap-1.5 ${
-                (selectedCategory === cat.id || (cat.id === 'dev' && (selectedCategory === 'dev' || selectedCategory === 'smart')))
-                  ? 'bg-blue-600 text-white shadow-sm'
+              className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-semibold whitespace-nowrap transition-all cursor-pointer flex items-center gap-1.5 flex-shrink-0 ${
+                selectedCategory === cat.id ||
+                (cat.id === 'dev' && (selectedCategory === 'dev' || selectedCategory === 'smart'))
+                  ? 'bg-blue-600 text-white shadow-xs'
                   : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
               }`}
             >
               <span>{cat.label}</span>
               <span
-                className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
-                  (selectedCategory === cat.id || (cat.id === 'dev' && (selectedCategory === 'dev' || selectedCategory === 'smart')))
+                className={`text-[9px] sm:text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
+                  selectedCategory === cat.id ||
+                  (cat.id === 'dev' && (selectedCategory === 'dev' || selectedCategory === 'smart'))
                     ? 'bg-blue-700 text-white'
                     : 'bg-gray-100 dark:bg-gray-700 text-gray-500'
                 }`}
@@ -304,20 +306,20 @@ export function ToolSwitcher({ activeTool, onToolChange }: ToolSwitcherProps) {
         </div>
 
         {/* Search Bar */}
-        <div className="relative w-full sm:w-64">
-          <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+        <div className="relative w-full sm:w-60 md:w-64 flex-shrink-0">
+          <Search className="w-3.5 h-3.5 sm:w-4 sm:h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search 23 tools..."
-            className="w-full pl-9 pr-3 py-1.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-xs text-gray-900 dark:text-gray-100 outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full pl-8 sm:pl-9 pr-3 py-1.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-xs text-gray-900 dark:text-gray-100 outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
       </div>
 
-      {/* Grid of Tools */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5">
+      {/* Grid of Tools - Mobile-optimized columns and padding */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-2.5">
         {filteredTools.map((tool) => {
           const isActive = activeTool === tool.type;
           return (
@@ -325,31 +327,33 @@ export function ToolSwitcher({ activeTool, onToolChange }: ToolSwitcherProps) {
               key={tool.type}
               type="button"
               onClick={() => onToolChange(tool.type)}
-              className={`relative p-3 rounded-2xl text-left border transition-all duration-200 cursor-pointer flex flex-col justify-between ${
+              className={`relative p-2.5 sm:p-3 rounded-2xl text-left border transition-all duration-200 cursor-pointer flex flex-col justify-between active:scale-[0.98] ${
                 isActive
-                  ? 'border-blue-600 bg-blue-50/70 dark:bg-blue-950/40 shadow-md shadow-blue-500/10 ring-2 ring-blue-500/30'
-                  : 'border-gray-200/80 dark:border-gray-750 bg-white dark:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-600 hover:shadow-sm'
+                  ? 'border-blue-600 bg-blue-50/70 dark:bg-blue-950/40 shadow-sm shadow-blue-500/10 ring-2 ring-blue-500/30'
+                  : 'border-gray-200/80 dark:border-gray-750 bg-white dark:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-600 hover:shadow-xs'
               }`}
             >
               {tool.badge && (
-                <span className={`absolute top-2.5 right-2.5 text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded-md ${
-                  tool.badge === 'v3.0'
-                    ? 'bg-emerald-100 dark:bg-emerald-900 text-emerald-700 dark:text-emerald-300'
-                    : 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300'
-                }`}>
+                <span
+                  className={`absolute top-2 right-2 text-[8px] sm:text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded-md ${
+                    tool.badge === 'v3.0'
+                      ? 'bg-emerald-100 dark:bg-emerald-900 text-emerald-700 dark:text-emerald-300'
+                      : 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300'
+                  }`}
+                >
                   {tool.badge}
                 </span>
               )}
 
-              <div className="p-2 rounded-xl bg-gray-50 dark:bg-gray-750 w-fit mb-2">
+              <div className="p-1.5 sm:p-2 rounded-xl bg-gray-50 dark:bg-gray-750 w-fit mb-1.5 sm:mb-2">
                 {tool.icon}
               </div>
 
-              <div>
-                <div className="text-xs font-bold text-gray-900 dark:text-gray-100">
+              <div className="w-full min-w-0">
+                <div className="text-xs sm:text-sm font-bold text-gray-900 dark:text-gray-100 truncate">
                   {tool.label}
                 </div>
-                <div className="text-[11px] text-gray-500 dark:text-gray-400 line-clamp-1 mt-0.5">
+                <div className="text-[10px] sm:text-[11px] text-gray-500 dark:text-gray-400 line-clamp-1 mt-0.5">
                   {tool.shortDesc}
                 </div>
               </div>

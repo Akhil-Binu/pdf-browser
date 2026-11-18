@@ -523,7 +523,7 @@ export function PdfSigner() {
               {/* Rendered page container */}
               <div
                 onClick={handlePageClick}
-                className="relative cursor-crosshair rounded-xl border border-gray-300 dark:border-gray-700 overflow-hidden shadow-inner bg-slate-200 dark:bg-gray-950 flex items-center justify-center min-h-[420px]"
+                className="relative cursor-crosshair rounded-xl border border-gray-300 dark:border-gray-700 overflow-hidden shadow-inner bg-slate-200 dark:bg-gray-950 flex items-center justify-center min-h-[260px] sm:min-h-[420px]"
               >
                 {isLoadingPage && (
                   <div className="absolute inset-0 bg-white/70 dark:bg-gray-950/70 backdrop-blur-xs flex items-center justify-center z-20">

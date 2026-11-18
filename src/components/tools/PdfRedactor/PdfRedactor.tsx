@@ -408,7 +408,7 @@ export function PdfRedactor() {
                 onMouseDown={handleMouseDown}
                 onMouseMove={handleMouseMove}
                 onMouseUp={handleMouseUp}
-                className="relative select-none cursor-crosshair rounded-xl border border-gray-300 dark:border-gray-700 overflow-hidden shadow-inner bg-slate-200 dark:bg-gray-950 flex items-center justify-center min-h-[440px]"
+                className="relative select-none cursor-crosshair rounded-xl border border-gray-300 dark:border-gray-700 overflow-hidden shadow-inner bg-slate-200 dark:bg-gray-950 flex items-center justify-center min-h-[260px] sm:min-h-[440px]"
               >
                 {isLoadingPage && (
                   <div className="absolute inset-0 bg-white/70 dark:bg-gray-950/70 backdrop-blur-xs flex items-center justify-center z-20">

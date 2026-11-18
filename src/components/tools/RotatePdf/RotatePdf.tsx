@@ -163,11 +163,11 @@ export function RotatePdf() {
           </div>
 
           {/* Grid of Pages */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 sm:gap-4">
             {pages.map((p, idx) => (
               <div
                 key={p.originalIndex}
-                className="bg-white dark:bg-gray-800 rounded-2xl p-3 border border-gray-200 dark:border-gray-700 flex flex-col items-center shadow-sm hover:shadow-md transition-all"
+                className="bg-white dark:bg-gray-800 rounded-2xl p-2 sm:p-3 border border-gray-200 dark:border-gray-700 flex flex-col items-center shadow-xs hover:shadow-md transition-all"
               >
                 <div className="w-full flex items-center justify-between text-xs text-gray-400 mb-2">
                   <span className="font-semibold px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300">

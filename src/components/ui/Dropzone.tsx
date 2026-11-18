@@ -156,7 +156,7 @@ export function Dropzone({
             handleClick();
           }
         }}
-        className={`relative border-2 border-dashed rounded-2xl p-10 text-center transition-all duration-200 cursor-pointer select-none outline-none focus:ring-2 focus:ring-blue-500/40 ${
+        className={`relative border-2 border-dashed rounded-2xl p-6 sm:p-10 text-center transition-all duration-200 cursor-pointer select-none outline-none focus:ring-2 focus:ring-blue-500/40 ${
           isDragOver
             ? 'border-blue-500 bg-blue-50/80 dark:bg-blue-950/30 scale-[1.01] shadow-lg shadow-blue-500/10'
             : 'border-gray-300 dark:border-gray-700 bg-white/60 dark:bg-gray-800/40 hover:border-blue-400 dark:hover:border-blue-500 hover:bg-blue-50/30 dark:hover:bg-gray-800/70'
@@ -170,19 +170,19 @@ export function Dropzone({
           onChange={handleInputChange}
           className="hidden"
         />
-        <div className="flex flex-col items-center gap-3">
+        <div className="flex flex-col items-center gap-2.5 sm:gap-3">
           <div
-            className={`p-4 rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 transition-transform duration-200 ${
+            className={`p-3 sm:p-4 rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 transition-transform duration-200 ${
               isDragOver ? 'scale-110 shadow-md' : ''
             }`}
           >
             {icon}
           </div>
           <div>
-            <p className="text-base font-semibold text-gray-800 dark:text-gray-100">
+            <p className="text-sm sm:text-base font-semibold text-gray-800 dark:text-gray-100">
               {displayLabel}
             </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <p className="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400 mt-0.5 sm:mt-1">
               {displaySublabel}
             </p>
           </div>

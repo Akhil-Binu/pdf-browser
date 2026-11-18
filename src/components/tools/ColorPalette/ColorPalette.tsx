@@ -328,7 +328,7 @@ export function ColorPalette() {
                     src={previewUrl}
                     alt="Sample Target"
                     onClick={handleImageClick}
-                    className="max-h-[380px] w-auto object-contain rounded-xl cursor-crosshair shadow-xs select-none"
+                    className="max-h-[380px] w-auto max-w-full object-contain rounded-xl cursor-crosshair shadow-xs select-none"
                     title="Click any pixel on this image to add it to the palette"
                   />
                 )}

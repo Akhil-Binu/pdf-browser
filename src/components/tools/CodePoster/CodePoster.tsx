@@ -346,7 +346,7 @@ export function CodePoster() {
         </div>
 
         {/* Live Canvas Preview */}
-        <div className="lg:col-span-7 flex flex-col items-center justify-center p-6 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 space-y-3">
+        <div className="lg:col-span-7 flex flex-col items-center justify-center p-3 sm:p-6 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 space-y-3">
           <span className="font-semibold text-xs text-gray-400 uppercase tracking-wider flex items-center gap-1 self-start">
             <Sparkles className="w-3.5 h-3.5 text-cyan-500" /> Live High-DPI Output
           </span>
@@ -356,7 +356,7 @@ export function CodePoster() {
               <img
                 src={previewUrl}
                 alt="Rendered Card"
-                className="max-h-[500px] w-auto object-contain rounded-lg shadow-sm"
+                className="max-h-[500px] w-auto max-w-full object-contain rounded-lg shadow-sm"
               />
             </div>
           )}
