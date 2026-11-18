@@ -1,22 +1,25 @@
 import React, { useState, useRef, useCallback, useMemo } from 'react';
-import { AlertTriangle, X } from 'lucide-react';
+import { AlertTriangle, X, UploadCloud } from 'lucide-react';
 
 export type AcceptProp = string | Record<string, string[]>;
 
 export interface DropzoneProps {
-  onFilesAdded: (files: File[]) => void;
+  onFilesAdded?: (files: File[]) => void;
+  onDrop?: (files: File[]) => void;
   accept?: AcceptProp;
   multiple?: boolean;
+  maxFiles?: number;
   label?: string;
   sublabel?: string;
   title?: string;
   subtitle?: string;
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   onError?: (message: string) => void;
 }
 
 export function Dropzone({
   onFilesAdded,
+  onDrop,
   accept = '*/*',
   multiple = false,
   label,
@@ -32,6 +35,7 @@ export function Dropzone({
 
   const displayLabel = label || title || 'Drop files here';
   const displaySublabel = sublabel || subtitle || 'or click to browse';
+  const renderIcon = icon || <UploadCloud className="w-8 h-8" />;
 
   const normalizedAcceptString = useMemo(() => {
     if (typeof accept === 'string') return accept;
@@ -92,10 +96,11 @@ export function Dropzone({
       }
 
       if (validFiles.length > 0) {
-        onFilesAdded(validFiles);
+        if (onFilesAdded) onFilesAdded(validFiles);
+        if (onDrop) onDrop(validFiles);
       }
     },
-    [isFileTypeAccepted, normalizedAcceptString, onFilesAdded, onError]
+    [isFileTypeAccepted, normalizedAcceptString, onFilesAdded, onDrop, onError]
   );
 
   const handleDragEnter = useCallback((e: React.DragEvent) => {
@@ -176,7 +181,7 @@ export function Dropzone({
               isDragOver ? 'scale-110 shadow-md' : ''
             }`}
           >
-            {icon}
+            {renderIcon}
           </div>
           <div>
             <p className="text-sm sm:text-base font-semibold text-gray-800 dark:text-gray-100">

@@ -22,6 +22,20 @@ import {
   Code2,
   Video,
   Music,
+  FileCheck,
+  Info,
+  FileText,
+  ScrollText,
+  Layers,
+  Smile,
+  KeyRound,
+  Fingerprint,
+  Ghost,
+  ArrowLeftRight,
+  Binary,
+  Regex,
+  MonitorPlay,
+  Gauge,
 } from 'lucide-react';
 import type { ToolType, ToolCategory, ToolDefinition } from '../../types';
 
@@ -31,7 +45,7 @@ interface ToolSwitcherProps {
 }
 
 const toolsList: (ToolDefinition & { icon: React.ReactNode })[] = [
-  // 1-10: PDF Category
+  // 1-14: PDF Category
   {
     type: 'merge-pdf',
     category: 'pdf',
@@ -116,8 +130,44 @@ const toolsList: (ToolDefinition & { icon: React.ReactNode })[] = [
     icon: <GitCompare className="w-5 h-5 text-teal-500" />,
     iconName: 'GitCompare',
   },
+  {
+    type: 'form-pdf',
+    category: 'pdf',
+    label: 'Fill & Flatten Forms',
+    shortDesc: 'Interactive AcroForm filler & flatten',
+    badge: 'v4.0',
+    icon: <FileCheck className="w-5 h-5 text-blue-500" />,
+    iconName: 'FileCheck',
+  },
+  {
+    type: 'metadata-pdf',
+    category: 'pdf',
+    label: 'PDF Metadata & Privacy',
+    shortDesc: 'Edit attributes & sanitize tracking metadata',
+    badge: 'v4.0',
+    icon: <Info className="w-5 h-5 text-purple-500" />,
+    iconName: 'Info',
+  },
+  {
+    type: 'extract-text-pdf',
+    category: 'pdf',
+    label: 'Extract Text Stream',
+    shortDesc: 'Extract page text, live search & JSON export',
+    badge: 'v4.0',
+    icon: <FileText className="w-5 h-5 text-amber-500" />,
+    iconName: 'FileText',
+  },
+  {
+    type: 'markdown-to-pdf',
+    category: 'pdf',
+    label: 'Markdown to PDF',
+    shortDesc: 'Live split-pane editor & A4 compiler',
+    badge: 'v4.0',
+    icon: <ScrollText className="w-5 h-5 text-emerald-500" />,
+    iconName: 'ScrollText',
+  },
 
-  // 11-18: Image Category
+  // 15-24: Image & Design Category
   {
     type: 'compress-image',
     category: 'image',
@@ -185,8 +235,26 @@ const toolsList: (ToolDefinition & { icon: React.ReactNode })[] = [
     icon: <FileCode className="w-5 h-5 text-orange-500" />,
     iconName: 'FileCode',
   },
+  {
+    type: 'batch-watermark',
+    category: 'image',
+    label: 'Batch Watermark',
+    shortDesc: 'Batch stamp logos/text & export to ZIP',
+    badge: 'v4.0',
+    icon: <Layers className="w-5 h-5 text-cyan-500" />,
+    iconName: 'Layers',
+  },
+  {
+    type: 'meme-maker',
+    category: 'image',
+    label: 'Meme Generator',
+    shortDesc: 'Impact typography & instant viral memes',
+    badge: 'v4.0',
+    icon: <Smile className="w-5 h-5 text-pink-500" />,
+    iconName: 'Smile',
+  },
 
-  // 19-21: Smart & Dev Category
+  // 25-33: Dev & Security Category
   {
     type: 'ocr-extract',
     category: 'smart',
@@ -214,8 +282,62 @@ const toolsList: (ToolDefinition & { icon: React.ReactNode })[] = [
     icon: <Code2 className="w-5 h-5 text-cyan-500" />,
     iconName: 'Code2',
   },
+  {
+    type: 'file-encrypt',
+    category: 'dev',
+    label: 'File Vault Encryptor',
+    shortDesc: 'AES-256-GCM browser encryption & vault',
+    badge: 'v4.0',
+    icon: <KeyRound className="w-5 h-5 text-emerald-500" />,
+    iconName: 'KeyRound',
+  },
+  {
+    type: 'hash-verifier',
+    category: 'dev',
+    label: 'Hash & Checksum',
+    shortDesc: 'Instant SHA-256/512 integrity verifier',
+    badge: 'v4.0',
+    icon: <Fingerprint className="w-5 h-5 text-amber-500" />,
+    iconName: 'Fingerprint',
+  },
+  {
+    type: 'steganography',
+    category: 'dev',
+    label: 'Image Steganography',
+    shortDesc: 'Conceal secret messages inside PNG pixels',
+    badge: 'v4.0',
+    icon: <Ghost className="w-5 h-5 text-purple-500" />,
+    iconName: 'Ghost',
+  },
+  {
+    type: 'data-converter',
+    category: 'dev',
+    label: 'Data Converter',
+    shortDesc: 'RFC 4180 JSON ⇄ CSV instant conversion',
+    badge: 'v4.0',
+    icon: <ArrowLeftRight className="w-5 h-5 text-indigo-500" />,
+    iconName: 'ArrowLeftRight',
+  },
+  {
+    type: 'base64-studio',
+    category: 'dev',
+    label: 'Base64 Studio',
+    shortDesc: 'Encode files, Data URIs & decode binary',
+    badge: 'v4.0',
+    icon: <Binary className="w-5 h-5 text-cyan-500" />,
+    iconName: 'Binary',
+  },
+  {
+    type: 'regex-tester',
+    category: 'dev',
+    label: 'Regex Debugger',
+    shortDesc: 'Live pattern highlighting & capture groups',
+    badge: 'v4.0',
+    icon: <Regex className="w-5 h-5 text-rose-500" />,
+    iconName: 'Regex',
+  },
 
-  // 22-23: Media Category
+  // 34-37: Media & Audio Category
   {
     type: 'video-frames',
     category: 'media',
@@ -233,6 +355,24 @@ const toolsList: (ToolDefinition & { icon: React.ReactNode })[] = [
     badge: 'v3.0',
     icon: <Music className="w-5 h-5 text-emerald-500" />,
     iconName: 'Music',
+  },
+  {
+    type: 'screen-recorder',
+    category: 'media',
+    label: 'Screen Recorder',
+    shortDesc: 'Capture display & audio with zero server load',
+    badge: 'v4.0',
+    icon: <MonitorPlay className="w-5 h-5 text-violet-500" />,
+    iconName: 'MonitorPlay',
+  },
+  {
+    type: 'audio-speed',
+    category: 'media',
+    label: 'Audio Speed & Reverse',
+    shortDesc: '0.25x - 4x tempo adjust & backward export',
+    badge: 'v4.0',
+    icon: <Gauge className="w-5 h-5 text-teal-500" />,
+    iconName: 'Gauge',
   },
 ];
 
@@ -276,7 +416,7 @@ export function ToolSwitcher({ activeTool, onToolChange }: ToolSwitcherProps) {
             { id: 'all', label: 'All Utilities', count: counts.all },
             { id: 'pdf', label: 'PDF Suite', count: counts.pdf },
             { id: 'image', label: 'Images & Design', count: counts.image },
-            { id: 'dev', label: 'Dev & QR', count: counts.dev },
+            { id: 'dev', label: 'Dev & Security', count: counts.dev },
             { id: 'media', label: 'Audio & Video', count: counts.media },
           ].map((cat) => (
             <button
@@ -312,7 +452,7 @@ export function ToolSwitcher({ activeTool, onToolChange }: ToolSwitcherProps) {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search 23 tools..."
+            placeholder={`Search ${toolsList.length} tools...`}
             className="w-full pl-8 sm:pl-9 pr-3 py-1.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-xs text-gray-900 dark:text-gray-100 outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
@@ -336,9 +476,11 @@ export function ToolSwitcher({ activeTool, onToolChange }: ToolSwitcherProps) {
               {tool.badge && (
                 <span
                   className={`absolute top-2 right-2 text-[8px] sm:text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded-md ${
-                    tool.badge === 'v3.0'
-                      ? 'bg-emerald-100 dark:bg-emerald-900 text-emerald-700 dark:text-emerald-300'
-                      : 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300'
+                    tool.badge === 'v4.0'
+                      ? 'bg-blue-100 dark:bg-blue-950/80 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800'
+                      : tool.badge === 'v3.0'
+                        ? 'bg-emerald-100 dark:bg-emerald-900 text-emerald-700 dark:text-emerald-300'
+                        : 'bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300'
                   }`}
                 >
                   {tool.badge}

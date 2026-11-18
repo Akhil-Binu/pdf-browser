@@ -42,7 +42,11 @@ export type ToolType =
   | 'redact-pdf'
   | 'resize-pdf'
   | 'diff-pdf'
-  // Image Utilities
+  | 'form-pdf'
+  | 'metadata-pdf'
+  | 'extract-text-pdf'
+  | 'markdown-to-pdf'
+  // Image & Design
   | 'compress-image'
   | 'image-to-pdf'
   | 'convert-image'
@@ -51,13 +55,23 @@ export type ToolType =
   | 'favicon-gen'
   | 'color-palette'
   | 'svg-optimizer'
-  // Smart & Dev
+  | 'batch-watermark'
+  | 'meme-maker'
+  // Dev & Security
   | 'ocr-extract'
   | 'code-poster'
   | 'qr-suite'
-  // Media
+  | 'file-encrypt'
+  | 'hash-verifier'
+  | 'steganography'
+  | 'data-converter'
+  | 'base64-studio'
+  | 'regex-tester'
+  // Media & Audio
   | 'video-frames'
-  | 'audio-trimmer';
+  | 'audio-trimmer'
+  | 'screen-recorder'
+  | 'audio-speed';
 
 export interface ToolDefinition {
   type: ToolType;

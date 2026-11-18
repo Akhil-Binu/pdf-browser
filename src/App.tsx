@@ -3,7 +3,7 @@ import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { ToolSwitcher } from './components/layout/ToolSwitcher';
 
-// 12 Existing Tools
+// 12 Original Tools
 import { MergePdf } from './components/tools/MergePdf/MergePdf';
 import { SplitPdf } from './components/tools/SplitPdf/SplitPdf';
 import { RotatePdf } from './components/tools/RotatePdf/RotatePdf';
@@ -17,7 +17,7 @@ import { CropImage } from './components/tools/CropImage/CropImage';
 import { FilterScanner } from './components/tools/FilterScanner/FilterScanner';
 import { OcrTool } from './components/tools/OcrTool/OcrTool';
 
-// 11 New Tools (v3.0.0)
+// 11 v3.0 Tools
 import { PdfSigner } from './components/tools/PdfSigner/PdfSigner';
 import { PdfRedactor } from './components/tools/PdfRedactor/PdfRedactor';
 import { PdfResizer } from './components/tools/PdfResizer/PdfResizer';
@@ -29,6 +29,22 @@ import { QrSuite } from './components/tools/QrSuite/QrSuite';
 import { CodePoster } from './components/tools/CodePoster/CodePoster';
 import { VideoFrames } from './components/tools/VideoFrames/VideoFrames';
 import { AudioTrimmer } from './components/tools/AudioTrimmer/AudioTrimmer';
+
+// 14 v4.0 Tools
+import { PdfFormFiller } from './components/tools/PdfFormFiller/PdfFormFiller';
+import { PdfMetadata } from './components/tools/PdfMetadata/PdfMetadata';
+import { PdfTextExtract } from './components/tools/PdfTextExtract/PdfTextExtract';
+import { MarkdownToPdf } from './components/tools/MarkdownToPdf/MarkdownToPdf';
+import { BatchWatermark } from './components/tools/BatchWatermark/BatchWatermark';
+import { MemeMaker } from './components/tools/MemeMaker/MemeMaker';
+import { FileEncryptor } from './components/tools/FileEncryptor/FileEncryptor';
+import { HashVerifier } from './components/tools/HashVerifier/HashVerifier';
+import { Steganography } from './components/tools/Steganography/Steganography';
+import { DataConverter } from './components/tools/DataConverter/DataConverter';
+import { Base64Studio } from './components/tools/Base64Studio/Base64Studio';
+import { RegexTester } from './components/tools/RegexTester/RegexTester';
+import { ScreenRecorder } from './components/tools/ScreenRecorder/ScreenRecorder';
+import { AudioSpeed } from './components/tools/AudioSpeed/AudioSpeed';
 
 import type { ToolType } from './types';
 
@@ -42,14 +58,14 @@ function App() {
       <main className="flex-1 max-w-5xl mx-auto w-full px-3 sm:px-4 py-4 sm:py-8 md:py-10">
         {/* Hero Section */}
         <div className="text-center mb-5 sm:mb-8">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 text-[11px] sm:text-xs font-bold border border-emerald-200 dark:border-emerald-800 mb-2">
-            <span>v3.0 • 23 High-Speed Client Utilities</span>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 text-[11px] sm:text-xs font-bold border border-blue-200 dark:border-blue-800 mb-2">
+            <span>v4.0 • 37 High-Speed Client Utilities</span>
           </div>
           <h2 className="text-xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
-            Client-Side PDF, Image & Media Studio
+            Client-Side PDF, Media, Security & Dev Studio
           </h2>
           <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm text-gray-600 dark:text-gray-400 max-w-xl mx-auto px-2">
-            Process documents, images, audio, video, and code securely right in your browser. All computations happen locally with zero file uploads and zero servers.
+            Process documents, multimedia, encryption vaults, QR codes, audio and code securely right in your browser. 100% local computations with zero file uploads and zero servers.
           </p>
         </div>
 
@@ -69,6 +85,10 @@ function App() {
           {activeTool === 'redact-pdf' && <PdfRedactor />}
           {activeTool === 'resize-pdf' && <PdfResizer />}
           {activeTool === 'diff-pdf' && <PdfDiff />}
+          {activeTool === 'form-pdf' && <PdfFormFiller />}
+          {activeTool === 'metadata-pdf' && <PdfMetadata />}
+          {activeTool === 'extract-text-pdf' && <PdfTextExtract />}
+          {activeTool === 'markdown-to-pdf' && <MarkdownToPdf />}
 
           {/* Image & Design Suite */}
           {activeTool === 'compress-image' && <CompressImage />}
@@ -79,15 +99,25 @@ function App() {
           {activeTool === 'favicon-gen' && <FaviconGen />}
           {activeTool === 'color-palette' && <ColorPalette />}
           {activeTool === 'svg-optimizer' && <SvgOptimizer />}
+          {activeTool === 'batch-watermark' && <BatchWatermark />}
+          {activeTool === 'meme-maker' && <MemeMaker />}
 
-          {/* Dev & Smart Suite */}
+          {/* Dev & Security Suite */}
           {activeTool === 'ocr-extract' && <OcrTool />}
           {activeTool === 'qr-suite' && <QrSuite />}
           {activeTool === 'code-poster' && <CodePoster />}
+          {activeTool === 'file-encrypt' && <FileEncryptor />}
+          {activeTool === 'hash-verifier' && <HashVerifier />}
+          {activeTool === 'steganography' && <Steganography />}
+          {activeTool === 'data-converter' && <DataConverter />}
+          {activeTool === 'base64-studio' && <Base64Studio />}
+          {activeTool === 'regex-tester' && <RegexTester />}
 
-          {/* Media Suite */}
+          {/* Media & Audio Suite */}
           {activeTool === 'video-frames' && <VideoFrames />}
           {activeTool === 'audio-trimmer' && <AudioTrimmer />}
+          {activeTool === 'screen-recorder' && <ScreenRecorder />}
+          {activeTool === 'audio-speed' && <AudioSpeed />}
         </div>
       </main>
 

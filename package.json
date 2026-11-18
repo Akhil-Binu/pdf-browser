@@ -1,7 +1,7 @@
 {
   "name": "@akhil-binu/pdf-browser",
-  "version": "3.0.0",
-  "description": "100% client-side, browser-only utility suite with 23 tools for PDF manipulation, digital signatures, redactions, image compression, QR generation, SVG optimization, audio trimming, and video frame extraction with zero server uploads.",
+  "version": "4.0.0",
+  "description": "100% client-side, browser-only utility suite with 37 tools for PDF manipulation, AcroForm filling, AES-256 file encryption vaults, steganography, digital signatures, image compression, QR generation, screen recording, audio processing, and regex debugging with zero server uploads.",
   "type": "module",
   "author": "Akhil Binu",
   "license": "MIT",
@@ -51,6 +51,7 @@
     "jsqr": "^1.4.0",
     "jszip": "^3.10.2",
     "lucide-react": "^1.74.0",
+    "marked": "^18.2.1",
     "pdf-lib": "^1.17.1",
     "pdfjs-dist": "^4.10.38",
     "qrcode": "^1.5.4",
@@ -61,6 +62,7 @@
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.5",
     "@types/file-saver": "^2.0.7",
+    "@types/marked": "^5.0.2",
     "@types/node": "^24.19.2",
     "@types/qrcode": "^1.5.6",
     "@types/react": "^19.3.0",
