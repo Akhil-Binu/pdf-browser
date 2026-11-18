@@ -27,4 +27,28 @@ export interface CompressedImage {
 
 export type PageOrientation = 'portrait' | 'landscape';
 export type PageFit = 'fit' | 'original';
-export type ToolType = 'merge-pdf' | 'compress-image' | 'image-to-pdf';
+
+export type ToolCategory = 'all' | 'pdf' | 'image' | 'smart';
+
+export type ToolType =
+  | 'merge-pdf'
+  | 'split-pdf'
+  | 'rotate-pdf'
+  | 'pdf-to-images'
+  | 'watermark-pdf'
+  | 'protect-pdf'
+  | 'compress-image'
+  | 'image-to-pdf'
+  | 'convert-image'
+  | 'crop-image'
+  | 'filter-scanner'
+  | 'ocr-extract';
+
+export interface ToolDefinition {
+  type: ToolType;
+  category: 'pdf' | 'image' | 'smart';
+  label: string;
+  shortDesc: string;
+  badge?: string;
+  iconName: string;
+}
