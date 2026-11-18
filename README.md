@@ -14,7 +14,8 @@
 [![100% Local Processing](https://img.shields.io/badge/Privacy-100%25%20In--Browser-success?style=flat-square)](#-privacy-architecture)
 [![Zero Network Uploads](https://img.shields.io/badge/Server%20Uploads-ZERO-red?style=flat-square)](#-privacy-architecture)
 [![PWA Offline Ready](https://img.shields.io/badge/PWA-Installable%20%26%20Offline-blueviolet?style=flat-square)](#-progressive-web-app-offline)
-[![GitHub Package](https://img.shields.io/badge/GitHub%20Packages-@akhil--binu/pdf--browser-orange?style=flat-square&logo=github)](https://github.com/Akhil-Binu/pdf-browser/pkgs/npm/pdf-browser)
+[![GitHub Package](https://img.shields.io/badge/GitHub%20Packages-@akhil--binu/pdf--browser-orange?style=flat-square&logo=github)](https://github.com/users/Akhil-Binu/packages/npm/package/pdf-browser)
+[![GitHub Release](https://img.shields.io/github/v/release/Akhil-Binu/pdf-browser?style=flat-square&color=blue)](https://github.com/Akhil-Binu/pdf-browser/releases)
 [![Open Source](https://img.shields.io/badge/Open%20Source-GitHub-181717?style=flat-square&logo=github)](https://github.com/Akhil-Binu/pdf-browser)
 
 <p align="center">
@@ -192,18 +193,38 @@ npm run preview
 
 ## 📦 GitHub Packages Integration
 
-The studio is published on the GitHub Packages npm registry as `@akhil-binu/pdf-browser`.
+The studio is published on the GitHub Packages npm registry as [`@akhil-binu/pdf-browser`](https://github.com/users/Akhil-Binu/packages/npm/package/pdf-browser).
 
-### Installation via GitHub Packages
+### Option 1: Install via GitHub Packages Registry
 
-Create or update your `.npmrc`:
+1. In your project root, create or edit `.npmrc` to route the `@akhil-binu` scope to GitHub Packages:
 ```ini
 @akhil-binu:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+```
+*(Replace `${GITHUB_TOKEN}` with a GitHub Personal Access Token that has `read:packages` scope)*
+
+2. Install the package:
+```bash
+npm install @akhil-binu/pdf-browser@4.0.1
+```
+Or with Yarn / pnpm:
+```bash
+yarn add @akhil-binu/pdf-browser@4.0.1
+# or
+pnpm add @akhil-binu/pdf-browser@4.0.1
 ```
 
-Then install the package:
+### Option 2: Direct Offline Tarball Installation (No Token Needed)
+
+You can download the pre-packaged release tarball directly from GitHub Releases and install it without requiring registry authentication:
+
 ```bash
-npm install @akhil-binu/pdf-browser@4.0.0
+# Download the v4.0.1 tarball asset
+curl -LO https://github.com/Akhil-Binu/pdf-browser/releases/download/v4.0.1/akhil-binu-pdf-browser-4.0.1.tgz
+
+# Install locally
+npm install ./akhil-binu-pdf-browser-4.0.1.tgz
 ```
 
 ---
