@@ -1,6 +1,5 @@
 {
-  "name": "pdf-browser",
-  "private": true,
+  "name": "@akhil-binu/pdf-browser",
   "version": "3.0.0",
   "description": "100% client-side, browser-only utility suite with 23 tools for PDF manipulation, digital signatures, redactions, image compression, QR generation, SVG optimization, audio trimming, and video frame extraction with zero server uploads.",
   "type": "module",
@@ -8,12 +7,22 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Akhil-Binu/pdf-browser.git"
+    "url": "git+https://github.com/Akhil-Binu/pdf-browser.git"
   },
   "bugs": {
     "url": "https://github.com/Akhil-Binu/pdf-browser/issues"
   },
   "homepage": "https://github.com/Akhil-Binu/pdf-browser#readme",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "main": "./dist/index.html",
+  "module": "./src/index.ts",
+  "types": "./src/index.ts",
   "keywords": [
     "pdf",
     "pdf-merger",
