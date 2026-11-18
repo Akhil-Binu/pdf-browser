@@ -6,7 +6,7 @@
 
 [![Live Demo](https://img.shields.io/badge/Demo-pdf--browser--vert.vercel.app-blue?style=for-the-badge&logo=vercel)](https://pdf-browser-vert.vercel.app)
 [![GitHub Stars](https://img.shields.io/github/stars/Akhil-Binu/pdf-browser?style=for-the-badge&color=gold)](https://github.com/Akhil-Binu/pdf-browser/stargazers)
-[![Version](https://img.shields.io/badge/Version-4.0.0-emerald?style=for-the-badge)](package.json)
+[![Version](https://img.shields.io/badge/Version-4.0.1-emerald?style=for-the-badge)](package.json)
 [![License: MIT](https://img.shields.io/badge/License-MIT-purple?style=for-the-badge)](LICENSE)
 
 <br/>

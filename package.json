@@ -1,6 +1,6 @@
 {
   "name": "@akhil-binu/pdf-browser",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "100% client-side, browser-only utility suite with 37 tools for PDF manipulation, AcroForm filling, AES-256 file encryption vaults, steganography, digital signatures, image compression, QR generation, screen recording, audio processing, and regex debugging with zero server uploads.",
   "type": "module",
   "author": "Akhil Binu",
