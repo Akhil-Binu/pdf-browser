@@ -14,6 +14,7 @@
 [![100% Local Processing](https://img.shields.io/badge/Privacy-100%25%20In--Browser-success?style=flat-square)](#-privacy-architecture)
 [![Zero Network Uploads](https://img.shields.io/badge/Server%20Uploads-ZERO-red?style=flat-square)](#-privacy-architecture)
 [![PWA Offline Ready](https://img.shields.io/badge/PWA-Installable%20%26%20Offline-blueviolet?style=flat-square)](#-progressive-web-app-offline)
+[![GitHub Package](https://img.shields.io/badge/GitHub%20Packages-@akhil--binu/pdf--browser-orange?style=flat-square&logo=github)](https://github.com/Akhil-Binu/pdf-browser/pkgs/npm/pdf-browser)
 [![Open Source](https://img.shields.io/badge/Open%20Source-GitHub-181717?style=flat-square&logo=github)](https://github.com/Akhil-Binu/pdf-browser)
 
 <p align="center">
@@ -153,7 +154,23 @@ PDF & Media Utility Studio is fully configured as a Progressive Web App (PWA):
 - [Node.js](https://nodejs.org/) (v18.0.0 or higher recommended)
 - `npm` or `pnpm`
 
-### Installation
+### Installation via GitHub Packages (npm)
+
+You can install the client utility library into any React/web application:
+
+```bash
+# Add @akhil-binu scope registry to your .npmrc
+echo "@akhil-binu:registry=https://npm.pkg.github.com" >> .npmrc
+
+# Install the package
+npm install @akhil-binu/pdf-browser
+```
+
+```ts
+import { mergePdfs, signPdfDocument, compressImage } from '@akhil-binu/pdf-browser';
+```
+
+### Installation from Source
 
 ```bash
 # Clone the repository
